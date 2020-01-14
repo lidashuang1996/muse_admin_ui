@@ -1,7 +1,8 @@
 <template>
   <div class="login">
     <div class="login-content">
-      <div class="login-content-logo">ZZ-WMS
+      <div class="login-content-logo">
+        ZZ-WMS
       </div>
       <div class="login-content-division"></div>
       <div class="login-content-input">

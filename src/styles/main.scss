@@ -39,11 +39,10 @@ body {
   min-width: 800px;
   min-height: 500px;
   position: relative;
-  background-image: url("/images/login-bg.jpg");
+  background-image: url('/images/login-bg.jpg');
   background-origin: content-box;
   background-position: center;
   background-repeat: no-repeat;
-
   .login-content {
     position: absolute;
     top: 50%;
@@ -57,20 +56,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     .login-content-logo {
       width: 40%;
       text-align: center;
       font-size: 28px;
       color: #ff8a4c;
     }
-
     .login-content-division {
       width: 1px;
       height: 86%;
       background: #e4e4e4;
     }
-
     .login-content-input {
       width: 60%;
       padding: 0 20px 0 46px;
@@ -93,7 +89,6 @@ body {
       .l-input {
         width: 90%;
       }
-
       .l-button {
         width: 372px;
         cursor: pointer;
@@ -195,7 +190,6 @@ body {
 
 
 .home {
-
   .home-main-head {
     position: fixed;
     width: 100%;
@@ -277,6 +271,7 @@ body {
             }
           }
           .home-main-head-nav-content-right-user {
+            margin-left: 12px;
             .home-main-head-nav-content-right-user-box {
               display: flex;
               height: 64px;
@@ -289,6 +284,7 @@ body {
                 text-overflow: ellipsis;
                 overflow: hidden;
                 max-width: 100px;
+                min-width: 50px;
               }
             }
           }
@@ -336,21 +332,25 @@ body {
     }
   }
 
-  .home-main-head-nav-content-right-user-nav {
-    padding: 12px 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    i {
-      color: #555555;
-    }
-    span {
-      font-size: 14px;
-      color: #555555;
-      margin-left: 6px;
+  .home-main-head-nav-content-right-user-popup {
+    width: 140px;
+    .home-main-head-nav-content-right-user-nav {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      i {
+        color: #555555;
+      }
+      span {
+        font-size: 14px;
+        color: #555555;
+        margin-left: 6px;
+      }
     }
   }
+
 
   .home-main-menu {
     background-color: #20222a;

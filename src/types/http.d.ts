@@ -53,7 +53,7 @@ declare interface HttpJurisdictionInterfaceQuery {
 
 declare interface HttpResult<T> {
   data: T;
-  code?: number;
+  code: number;
   message: string;
 }
 

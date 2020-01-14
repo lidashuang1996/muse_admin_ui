@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "message": "SUCCESS",
+  "data": {
+    "id": "ID_123",
+    "group": "1",
+    "role": "1",
+    "account": "1",
+    "alias": "1",
+    "name": "1",
+    "avatar": "https://img2.woyaogexing.com/2020/01/14/ae003677a48e4beaa0952890bb590270!400x400.jpeg",
+    "sex": "1",
+    "birthday": "1",
+    "token": "321321kll2k3nn321ms0s973",
+    "refreshToken": "321d722cc2da092ueq1uos",
+    "expiration": 65656245665
+  }
+}

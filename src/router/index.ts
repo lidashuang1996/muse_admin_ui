@@ -24,20 +24,15 @@ const Index17 = () => import('../views/home/test/index17.vue');
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'index',
-  //   component: () => import('../views/home/jurisdiction/JurisdictionInterface.vue')
-  // }
+  {
+    path: '/',
+    name: 'index',
+    component: () => import('../views/home/jurisdiction/JurisdictionInterface.vue')
+  },
   {
     path: '/tool',
     name: 'tool',
     component: () => import('../views/home/tool/ViewTool.vue')
-  },
-  {
-    path: '/',
-    name: 'lock_screen',
-    component: () => import('../views/other/LockScreen.vue')
   },
   {
     path: '/index',

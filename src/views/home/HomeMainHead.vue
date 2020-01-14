@@ -36,19 +36,23 @@
             <mu-menu placement="bottom-start" open-on-hover>
               <div class="home-main-head-nav-content-right-user-box">
                 <mu-avatar size="42">
-                  <img :src="avatarPath" alt="HOME_MAIN_HEAD_USER_IMG"/>
+                  <img :src="loginData.avatar" alt="HOME_MAIN_HEAD_USER_IMG"/>
                 </mu-avatar>
                 <span class="home-main-head-nav-content-right-user-box-name" v-text="loginData.name"/>
               </div>
               <!-- 弹出的菜单的列表 -->
               <div slot="content" class="home">
-                <div ripple="ripple" class="home-main-head-nav-content-right-user-nav" @click.stop="">
-                  <i class="material-icons">account_circle</i>
-                  <span>账号信息</span>
+                <div class="home-main-head-nav-content-right-user-popup">
+                  <touch-ripple :speed="1" :opacity="0.3" color="#000" transition="ease" class="home-main-head-nav-content-right-user-nav">
+                    <i class="material-icons">account_circle</i>
+                    <span>账号信息</span>
+                  </touch-ripple>
                 </div>
-                <div ripple="ripple" class="home-main-head-nav-content-right-user-nav" @click.stop="logout">
-                  <i class="material-icons">close</i>
-                  <span>退出登录</span>
+                <div class="home-main-head-nav-content-right-user-popup" @click.stop="logout()">
+                  <touch-ripple :speed="1" :opacity="0.3" color="#000" transition="ease" class="home-main-head-nav-content-right-user-nav" >
+                    <i class="material-icons">close</i>
+                    <span>退出登录</span>
+                  </touch-ripple>
                 </div>
               </div>
             </mu-menu>
@@ -75,13 +79,11 @@
 <script lang="ts">
 import http from '../../http/main';
 import Cache from '../../utils/cache';
-import Config from '../../config/main';
 import Screen from '../../utils/screen';
 import Crypto from '../../utils/crypto';
 import { State, Mutation } from 'vuex-class';
 import { Component, Vue } from 'vue-property-decorator';
-@Component({
-})
+@Component({})
 export default class HomeMainHead extends Vue {
   // 读取 vuex 里面缓存的用户登录数据
   @State('login') protected loginData!: HttpLoginDataResult;
@@ -89,8 +91,6 @@ export default class HomeMainHead extends Vue {
   @Mutation('isMenuFold') protected isMenuFoldMutation!: IsMenuFoldStoreMutation;
   // 是否为全屏
   protected isFull: boolean = false;
-  // 用户图片地址
-  protected avatarPath: string = Config.IMG_URL + this.loginData.avatar;
 
   /**
    * 读取是否为全屏
@@ -150,12 +150,9 @@ export default class HomeMainHead extends Vue {
   protected logout () {
     this.$confirm('您确定退出登录吗？', '提示', {}).then(async ({ result }) => {
       if (result) {
+        Cache.logout().init(); // 清除缓存数据
         const res: HttpLogoutResult = await http.apiLogout({ token: this.loginData.token });
-        if (res.code === undefined) {
-          this.$alert('网络异常，请稍后再试', '提示', {});
-        } else if (res.code === 200) {
-          Cache.clear().init(); // 清除缓存数据
-        } else this.$alert(res.message, '提示', {});
+        console.log(res);
       }
     });
   }

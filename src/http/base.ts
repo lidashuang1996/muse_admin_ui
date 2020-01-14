@@ -3,9 +3,6 @@
  */
 import _http from 'axios';
 
-export class Base {
-}
-
 /**
  * 设置超时的时间
  */
