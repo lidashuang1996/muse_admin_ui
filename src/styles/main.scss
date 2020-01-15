@@ -228,6 +228,7 @@ body {
         .home-main-head-nav-content-right {
           display: flex;
           padding-right: 26px;
+          color: #474747;
           .home-main-head-nav-content-right-notice {
             display: flex;
             justify-content: center;
@@ -302,31 +303,33 @@ body {
         display: flex;
         justify-content: flex-start;
         padding: 0 20px;
+
         .home-main-head-menu-content-item {
-          height: 100%;
-          line-height: 40px;
+          height: 38px;
+          line-height: 38px;
           cursor: pointer;
-          padding: 0 50px 0 18px;
+          padding: 0 30px 0 10px;
           font-size: 14px;
-          border-radius: 2px;
+          border-radius: 3px;
           position: relative;
-          .home-main-head-menu-content-item-close {
-            position: absolute;
-            top: 0;
-            right: 18px;
-            width: 26px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            i {
-              font-size: 16px;
-            }
+        }
+        .home-main-head-menu-content-item-close {
+          position: absolute;
+          top: 2px;
+          right: 2px;
+          width: 26px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          i {
+            font-size: 16px;
           }
         }
         .home-main-head-menu-content-item-select {
-          color: #4bae6d;
-          border-bottom: 2px solid #4bae6d;
+          color: rgb(255, 152, 0);;
+          border-bottom: 2px solid rgb(255, 152, 0);
         }
       }
     }

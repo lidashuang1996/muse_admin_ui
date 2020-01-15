@@ -63,14 +63,14 @@
     <!-- 头部的菜单 -->
     <div class="home-main-head-menu">
       <div class="home-main-head-menu-content">
-<!--        <HomeMainHeadItem class="home-main-head-menu-content-item-select"></HomeMainHeadItem>-->
-<!--        <HomeMainHeadItem></HomeMainHeadItem>-->
-<!--        <HomeMainHeadItem></HomeMainHeadItem>-->
-<!--        <HomeMainHeadItem></HomeMainHeadItem>-->
-<!--        <HomeMainHeadItem></HomeMainHeadItem>-->
-<!--        <HomeMainHeadItem></HomeMainHeadItem>-->
-<!--        <HomeMainHeadItem></HomeMainHeadItem>-->
-<!--        <HomeMainHeadItem></HomeMainHeadItem>-->
+        <HomeMainHeadItem :data="pData2" class="home-main-head-menu-content-item-select"/>
+        <HomeMainHeadItem :data="pData1"/>
+        <HomeMainHeadItem :data="pData2"/>
+        <HomeMainHeadItem :data="pData2"/>
+        <HomeMainHeadItem :data="pData1"/>
+        <HomeMainHeadItem :data="pData1"/>
+        <HomeMainHeadItem :data="pData1"/>
+        <HomeMainHeadItem :data="pData1"/>
       </div>
     </div>
   </div>
@@ -80,18 +80,26 @@
 import http from '../../http/main';
 import Cache from '../../utils/cache';
 import Screen from '../../utils/screen';
-import Crypto from '../../utils/crypto';
 import { State, Mutation } from 'vuex-class';
 import { Component, Vue } from 'vue-property-decorator';
-@Component({})
+import HomeMainHeadItem from './HomeMainHeadItem.vue';
+@Component({
+  components: { HomeMainHeadItem }
+})
 export default class HomeMainHead extends Vue {
   // 读取 vuex 里面缓存的用户登录数据
   @State('login') protected loginData!: HttpLoginDataResult;
   @State('isMenuFold') protected isMenuFold!: boolean; // 菜单列表是否展开的状态
   @Mutation('isMenuFold') protected isMenuFoldMutation!: IsMenuFoldStoreMutation;
-  // 是否为全屏
-  protected isFull: boolean = false;
-
+  protected isFull: boolean = false; // 是否为全屏
+  protected pData1: any = {
+    bool: true,
+    name: '理想我们'
+  };
+  protected pData2: any = {
+    bool: false,
+    name: '李大双'
+  };
   /**
    * 读取是否为全屏
    */
@@ -125,14 +133,13 @@ export default class HomeMainHead extends Vue {
         if (value == null || value === '') message = '锁屏密码不能为空';
         else if (value.length < 5) message = '锁屏密码长度不能小于5';
         else if (value.length > 24) message = '锁屏密码长度不能大于24';
-        else if (!/^(?!\d+$)[\da-zA-Z]+$/.test(value)) message = '锁屏密码由数字和字母组成';
+        else if (!/^[1-9a-zA-Z]{5,}$/.test(value)) message = '锁屏密码由数字或字母组成';
         else { valid = true; message = ''; }
         return { valid, message };
       }
     }).then(({ result, value }) => {
       if (result) {
-        // 写入本地密码
-        Cache.setLockScreen({ pwd: Crypto.md5(String(value)) });
+        Cache.setLockScreen(String(value)).init(); // 写入本地密码
       }
     });
   }
@@ -151,8 +158,7 @@ export default class HomeMainHead extends Vue {
     this.$confirm('您确定退出登录吗？', '提示', {}).then(async ({ result }) => {
       if (result) {
         Cache.logout().init(); // 清除缓存数据
-        const res: HttpLogoutResult = await http.apiLogout({ token: this.loginData.token });
-        console.log(res);
+        await http.apiLogout({ token: this.loginData.token });
       }
     });
   }
